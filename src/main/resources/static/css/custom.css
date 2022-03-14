@@ -1,0 +1,305 @@
+/* Login page */
+
+.login  {
+    height: 100%;
+    width: 100%;
+    background-color: #fff;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+
+}
+
+.login__item {
+    width: 50%;
+    height: 100%;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    -ms-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    -ms-justify-content: center;
+    justify-content: center;
+    position: relative;
+}
+
+.login__item--illust {
+    background-color: rgb(29,45,91);
+}
+
+.login__item-content {
+    width: 330px;
+    text-align: center;
+    margin-top: -100px
+}
+
+.login__item--illust img {
+    width: 85%;
+}
+
+.login__title {
+    /* margin-top: 20px; */
+    margin-bottom: 7px;
+    color: #333;
+    font-weight: 600;
+    font-size: 10px;
+    line-height: 1.3;
+
+}
+
+.login__lsms {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    font-weight: 600;
+    font-size: 17px;
+    /* color: #646464; */
+    text-transform: uppercase;
+}
+
+.login__label {
+    font-weight: 500;
+    font-size: 12px;
+}
+
+.login__input {
+    padding: 10px 12px;
+}
+
+.login__footer {
+    position: absolute;
+    bottom: 2%;
+    font-size: 12px;
+    width: 90%;
+    text-align: center;
+}
+
+
+.table-fixed {
+    position: relative;
+    width: 100%;
+    overflow-x: scroll;
+    border-collapse: separate !important;
+}
+
+.table-fixed td {
+    padding: 8px !important;
+}
+
+.table-fixed thead tr th {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 20;
+    text-align: center;
+    color: #fff;
+    background-color: rgb(29,45,91);
+}
+
+.table-fixed thead tr th:first-child {
+    z-index: 25;
+    vertical-align: middle;
+}
+
+
+.table-fixed tbody tr > :nth-child(1) {
+    position: -webkit-sticky;
+    position: sticky;
+    left: 0;
+    z-index: 10;
+}
+
+.help-block {
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.pswd {
+    position: relative;
+}
+
+.pswd__info {
+    position: absolute;
+    top: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fff;
+    padding: 15px;
+    width: 300px;
+    border-radius:5px;
+    box-shadow:0 1px 3px #ccc;
+    border:1px solid #ddd;
+    text-align: left;
+    display: none;
+}
+
+.pswd__info::before {
+    content: "\25B2";
+    position:absolute;
+    top:-12px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size:14px;
+    line-height:14px;
+    color:#ddd;
+    text-shadow:none;
+    display:block;
+}
+
+.pswd__info p {
+    line-height: 1.2;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.pswd__info ul  li{
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.pswd__info ul  li i {
+    font-size: 18px;
+    margin-right: 12px;
+}
+
+.pswd__info .invalid {
+    color: #dc3545;
+}
+
+.pswd__info .valid {
+    color: #28a745;
+}
+
+
+@media(max-width: 768px) {
+    .login__item {
+        width: 100%;
+    }
+
+    .table-responsive>.table-bordered {
+        border: 1px solid #ddd !important;
+    }
+
+    .login__item-content {
+        width: 85%;
+    }
+
+    .login__item--illust {
+        display: none;
+    }
+
+    .login__footer {
+        font-size: 10px;
+    }
+
+    .table-responsive>.table>tbody>tr>td, .table-responsive>.table>tbody>tr>th, .table-responsive>.table>tfoot>tr>td, .table-responsive>.table>tfoot>tr>th, .table-responsive>.table>thead>tr>td, .table-responsive>.table>thead>tr>th {
+        white-space: inherit !important;
+    }
+
+    .dataTable {
+        width: 100% !important;
+        overflow: hidden;
+    }
+
+    .dataTable thead, tbody td {
+        border-top: none;
+    }
+
+
+    .dataTable thead > tr {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-bottom: 40px;
+    }
+
+    .dataTable thead > tr > th {
+        width: 100%;
+        border-bottom: none !important;
+        border-top: none !important;
+        padding: 0;
+    }
+
+    .dataTable thead > tr > th:before {
+        content: attr(data-label);
+        position: relative;
+        margin-bottom: 3px;
+        display: block;
+    }
+
+    .dataTable thead > tr > th > input, select, .select2 {
+        margin-bottom: 15px;
+    }
+
+    .dataTable thead > tr:last-child {
+        display: none;
+    }
+
+    .dataTable tbody > tr {
+        display: flex;
+        flex-direction: column;
+        /* margin-top: 10px;
+        padding-top: 10px; */
+        border-top: 1px solid #ccc !important;
+    }
+
+    .dataTable tbody > tr > td {
+        display: flex;
+        justify-content: space-between;
+        text-align: right;
+        border-top: none !important;
+    }
+
+    .dataTable tbody > tr > td  img {
+        max-height: 50px !important;
+    }
+
+    .dataTable tbody > tr > td:last-child {
+        /* justify-content: flex-end; */
+        align-items: center;
+    }
+
+    .dataTable tbody > tr > td:last-child > button {
+        margin-left: 5px;
+    }
+
+    .dataTable tbody > tr > td:last-child > a {
+        margin-left: 5px;
+    }
+
+    .dataTable tbody > tr > td:before {
+        content: attr(data-label);
+        position: relative;
+        color: #000;
+        min-width: 6rem;
+        margin-left: 0;
+        margin-right: 2rem;
+        text-align: left;
+        font-weight: 700;
+        white-space: normal;
+        flex-shrink: 0;
+    }
+
+    .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+        /* padding: 10px; */
+    }
+
+    .btn-add {
+        margin-bottom: 10px;
+    }
+
+    .btn {
+        white-space: inherit;
+    }
+
+    .table-responsive {
+        border: none;
+    }
+}

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>register</title>
+
+    <link rel="stylesheet" th:href="@{/css/register.css}">
+
+    <!-- font aweosome link  -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500;600;700&family=Red+Hat+Display&display=swap"
+            rel="stylesheet">
+
+</head>
+<body>
+<div class="container">
+    <form th:action="@{/auth/register}" method="post">
+        <div class="login-input">
+            <div class="login-text">
+                <h3>Create User</h3>
+            </div>
+            <input type="text" placeholder="Enter your Username" name="username">
+            <input type="text" placeholder="Enter your Email" name="email">
+            <input type="number" placeholder="Enter your Number (+998 xx xxx xx xx)" name="phoneNumber">
+            <input type="password" placeholder="Enter your password" name="password">
+            <input type="password" placeholder="Confirm your password" name="conPassword">
+            <br>
+            <div >
+                <select name="roleId" id="roleId">
+                    <option value="3">USER</option>
+                    <option value="2">ADMIN</option>
+                    <br>
+                </select>
+            </div>
+        </div>
+        <br> <br>
+        <div class="login-button">
+            <button type="submit">ADD</button>
+        </div>
+    </form>
+</div>
+<script>
+    document.getElementById("hide").onclick = function() {
+        document.getElementById("register").style.display = "none";
+    }
+
+    document.getElementById("show").onclick = function() {
+        document.getElementById("register").style.display = "block";
+    }
+</script>
+</body>
+</html>

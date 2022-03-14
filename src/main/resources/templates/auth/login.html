@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Trello Twitter</title>
+    <!-- Styles -->
+    <link th:href="@{/css/bootstrap.min.css}" type="text/css" rel="stylesheet">
+
+    <!-- Theme Styles -->
+    <link th:href="@{/css/space.css}" type="text/css" rel="stylesheet">
+    <link th:href="@{/css/custom.css}" type="text/css" rel="stylesheet">
+    <link th:href="@{/css/style.css}" type="text/css" rel="stylesheet">
+
+
+</head>
+<body>
+
+
+<div class="login">
+    <div class="login__item login__item--illust">
+        <img th:src="@{/images/study.svg}" alt="">
+    </div>
+    <div class="login__item">
+        <div class="login__item-content">
+            <h3 class="login__title">TRELLO TWITTER</h3>
+            <img th:src="@{/images/Twitter.png}" alt="" height="75">
+            <h4 class="login__lsms">Task Meneger </h4>
+            <form th:action="@{/auth/login}" th:method="POST">
+
+                <div class="form-group text-left">
+                    <label class="login__label" for="username">Username</label>
+                    <input type="text" name="username" class="form-control login__input" id="username"
+                           placeholder="Enter the username">
+                </div>
+
+                <div class="form-group text-left">
+                    <label class="login__label" for="password">Password</label>
+                    <input type="password" name="password" class="form-control login__input" id="password"
+                           placeholder="Enter the password">
+                </div>
+
+                <button type="submit" class="btn btn-primary full-width" id="login-btn">Login</button>
+                <br/>
+            </form>
+
+        </div>
+        <div class="login__footer">Copyright © 2021 of Twitter Group (PDP Academy B-4 Unicorn)</div>
+    </div>
+</div>
+<div style="display:none">
+
+</div>
+
+</body>
+</html>

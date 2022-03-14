@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/simple_trello_db
+    username: postgres
+    password: 1807
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+  banner:
+    image:
+      location: classpath:banner.txt
+server:
+  port: 8009

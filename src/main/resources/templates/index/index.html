@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:include="fragment.html :: header('Home Page')">
+</head>
+<style>
+    .logos {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+    }
+</style>
+<body>
+<header>
+    <section th:include="fragment.html :: main"></section>
+    <div class="modal fade" id="orgDelete" tabindex="-1" aria-labelledby="yy"
+         aria-hidden="true">
+        <section th:include="fragment.html :: orgDelete"></section>
+    </div>
+
+    <aside>
+        <section th:include="fragment.html :: navbar"></section>
+        <div class="modal fade" id="update" tabindex="-1" aria-labelledby="yy"
+             aria-hidden="true">
+            <section th:include="fragment.html :: userUpdate"></section>
+        </div>
+        <section th:include="fragment.html :: userDetail"></section>
+
+
+        <div sec:authorize="hasRole('SUPER_USER')">
+            <div style="text-align: center"><h1>Organizations </h1></div>
+            <div class="container">
+                <div class="row">
+                    <table class="table">
+                        <thead class="thead-light">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Logo</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Code</th>
+                            <th scope="col">Projects</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <tr th:each="organization,iter :  ${organizations}">
+                            <th th:text="${iter.count}"></th>
+                            <th><img class="logos" th:src="@{${organization.logo}}" alt=""></th>
+                            <th th:text="${organization.name}"></th>
+                            <th th:text="${organization.gmail}"></th>
+                            <th th:text="${organization.code}"></th>
+                            <th>
+                                <form th:action="@{/project/list/{id}(id=${organization.id})}">
+                                    <button type="submit" class="btn btn-success">Projects</button>
+                                </form>
+
+                            </th>
+
+
+                            <th class="icons d-flex justify-content-between">
+                                <a th:href="@{/organization/detail/{id}/(id = ${organization.id})}">👁</a>
+                                <a href="#">🔐</a>
+                                <a href="#">🔓</a>
+                                <a th:href="@{/organization/delete/{id}(id=${organization.id})}"
+                                   data-bs-toggle="modal" data-bs-target="#orgDelete">🗑</a>
+                                <a th:href="@{/organization/update/{id}(id=${organization.id})}">📝</a>
+                            </th>
+                        </tr>
+                        </tbody>
+                    </table>
+
+
+                    <div class="modals">
+                        <!-- Button trigger modal -->
+                        <button type="button" th:href="@{/organization/create}" style="margin-left: 1000px;"
+                                class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            ➕
+                        </button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                             aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel" style="text-align: center">Create
+                                            organization</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-10 mx-auto">
+                                                    <form th:action="@{/organization/create}" th:method="post"
+                                                          enctype="multipart/form-data">
+
+
+                                                        <div class="form-group">
+                                                            <label for="name">Name</label>
+                                                            <input type="text" class="form-control" id="name"
+                                                                   name="name"/>
+                                                        </div>
+
+
+                                                        <div class="form-group">
+                                                            <label for="logo">Logo</label>
+                                                            <input type="file" class="form-control" id="logo"
+                                                                   name="logo"/>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="code">Code</label>
+                                                            <input type="text" class="form-control" id="code"
+                                                                   name="code"/>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="email">Email address</label>
+                                                            <input type="email" class="form-control" name="gmail"
+                                                                   id="email"/>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                    data-bs-dismiss="modal">Close
+                                                            </button>
+                                                            <button class="btn btn-primary " type="submit"> ➕</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div sec:authorize="hasRole('ADMIN')">
+            <div style="text-align: center"><h1>Projects</h1></div>
+            <div class="container">
+                <div class="row">
+                    <table class="table">
+                        <thead class="thead-light">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Tz</th>
+                            <th scope="col">isBlock</th>
+                            <th scope="col">Tasks</th>
+                            <th scope="col">Add member</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="project,iter : ${projects}">
+                            <th th:text="${iter.count}"></th>
+                            <th th:text="${project.name}"></th>
+                            <th th:text="${project.description}"></th>
+                            <th th:text="${project.tz}"></th>
+                            <th th:text="${project.closed}"></th>
+                            <th>
+                                <form th:action="@{/task/list/{id}(id=${project.id})}">
+                                    <button type="submit" class="btn btn-success">Tasks</button>
+                                </form>
+                            </th>
+                            <th>
+                                <form th:action="@{/project_member/create_member/{id}(id = ${project.id})}">
+                                    <button type="submit" class="btn btn-primary">Add member</button>
+                                </form>
+                            </th>
+
+                            <th class="icons d-flex justify-content-between">
+                                <a th:href="@{/project/detail/{id}/(id = ${project.id})}">👁</a>
+                                <a href="#">🔐</a>
+                                <a href="#">🔓</a>
+                                <a th:href="@{/organizations/delete/{id}(id=${project.id})}">🗑</a>
+                                <a th:href="@{/organizations/update/{id}(id=${project.id})}">📝</a>
+                            </th>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <a th:href="@{/project/create/{id}(id=${orgId})}" style="margin-left: 1000px;">
+                        <button class="btn btn-primary " type="submit"> ➕</button>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+        <div sec:authorize="hasRole('USER')">
+            <div style="text-align: center"><h1>Tasks</h1></div>
+
+            <div class="container">
+                <div class="row">
+                    <table class="table">
+                        <thead class="thead-light">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Level</th>
+                            <th scope="col">Priority</th>
+                            <th scope="col">Deadline</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="task,iter : ${tasks}">
+                            <th th:text="${iter.count}"></th>
+                            <th th:text="${task.name}"></th>
+                            <th th:text="${task.description}"></th>
+                            <th th:text="${task.level}"></th>
+                            <th th:text="${task.priority}"></th>
+                            <th th:text="${task.deadline}"></th>
+
+                            <th class="icons d-flex justify-content-between">
+                                <a th:href="@{/task/detail/{id}/(id = ${task.id})}">👁</a>
+                                <a href="#">🔐</a>
+                                <a href="#">🔓</a>
+                                <a th:href="@{/task/delete/{id}(id=${task.id})}">🗑</a>
+                                <a th:href="@{/task/update/{id}(id=${task.id})}">📝</a>
+                            </th>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <a th:href="@{/task/create}" style="margin-left: 1000px;">
+                <button class="btn btn-primary " type="submit"> ➕</button>
+            </a>
+        </div>
+
+        </div>
+    </aside>
+
+</header>
+<section th:include="fragment.html :: js"></section>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:include="fragment.html :: header('Home Page')">
+</head>
+<style>
+    .logos {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+    }
+</style>
+<body>
+<header>
+    <section th:include="fragment.html :: main"></section>
+
+    <aside>
+        <section th:include="fragment.html :: navbar"></section>
+        <div class="modal fade" id="update" tabindex="-1" aria-labelledby="yy"
+             aria-hidden="true">
+            <section th:include="fragment.html :: userUpdate">  </section>
+        </div>
+        <section th:include="fragment.html :: userDetail">  </section>
+
+        <div class="container">
+            <div class="row">
+                <div class="card mx-auto" style="width: 30rem; height: 28rem">
+                    <div class="card-body" th:each="organization,iter : ${organization}">
+                        <h2 class="card-title" style="text-align: center">Organization delete</h2>
+                        <th>Logo : <img class="logos" th:src="@{${organization.logo}}" style="width: 10rem" alt=""></th>
+                        <h5 class="card-title">Name : <span th:text="${organization.name}"></span></h5>
+                        <h5 class="card-title">Email : <span th:text="${organization.gmail}"></span></h5>
+                        <h5 class="card-title">Code : <span th:text="${organization.code}"></span></h5>
+                        <h5 class="card-title">Owner id : <span th:text="${organization.owner}"></span></h5>
+                        <h5 class="card-title">Created at : <span th:text="${organization.createdAt}"></span></h5>
+                        <h5 class="card-title">Created by : <span th:text="${organization.createdBy}"></span></h5>
+                        <h4 style="text-align: center">Are you sure ? </h4>
+                        <form method="post"
+                              th:action="@{/organizations/delete/{id}(id=${organization.id})}" style="margin-left: 300px;">
+                            <button type="submit" class="btn btn-danger">Yes</button>
+                            <a th:href="@{/organization/list}" class="btn btn-warning">No</a>
+                        </form>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+        </div>
+    </aside>
+
+</header>
+<section th:include="fragment.html :: js"></section>
+</body>
+</html>

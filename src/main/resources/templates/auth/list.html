@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:include="fragment.html :: header('Users List')">
+</head>
+<style>
+    .logos {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+    }
+</style>
+<body>
+<header>
+    <section th:include="fragment.html :: main"></section>
+
+    <aside>
+        <nav>
+            <div class="input">
+                <div>
+                    <i class="fas fa-search"></i>
+                </div>
+
+                <input type="text" placeholder="Search">
+            </div>
+
+            <div class="user-information">
+                <div class="icon">
+
+                    <button type="button" class="btn btn-primary position-relative">
+                        <img th:src="@{/images/bell.png}" alt="">
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                             18+
+                        <span class="visually-hidden">unread messages</span>
+                    </span>
+                    </button>
+                    <i class="far fa-envelope"></i>
+                </div>
+
+                <div class="user">
+
+                    <img th:src="@{/images/useer.png}" alt="">
+                    <p>
+
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-angle-down">Profile</i>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item" th:href="@{/auth/detail/{id}(id=${userId})}">Info</a></li>
+                            <li><a class="dropdown-item" th:href="@{/auth/update}">Edit</a></li>
+                            <li><a class="dropdown-item" th:href="@{/auth/logout}">Logout</a></li>
+                        </ul>
+                    </div>
+
+                    </p>
+                </div>
+
+            </div>
+
+        </nav>
+
+        <div class="container ">
+            <div class="row">
+                <table class="table">
+                    <thead class="thead-light">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Phone Number</th>
+                        <th scope="col">Role</th>
+                        <th scope="col">Blocked</th>
+                        <th scope="col">CRUD</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="user,iter :  ${users}">
+                        <th th:text="${iter.count}"></th>
+                        <th th:text="${user.username}"></th>
+                        <th th:text="${user.email}"></th>
+                        <th th:text="${user.phoneNumber}"></th>
+                        <th th:text="${user.getRole().getCode}"></th>
+                        <th th:text="${user.blocked}"></th>
+
+
+                        <th class="icons d-flex justify-content-between">
+                            <a th:href="@{/auth/detail/{id}(id = ${user.id})}">👁</a>
+                            <a href="#">🔐</a>
+                            <a href="#">🔓</a>
+                            <a th:href="@{/auth/delete/{id}(id=${user.id})}">🗑</a>
+                            <a th:href="@{/auth/update/{id}(id=${user.id})}">📝</a>
+                        </th>
+                    </tr>
+                    </tbody>
+                </table>
+
+
+                <div class="modals">
+                    <!-- Button trigger modal -->
+                    <button type="button" th:href="@{/auth/register}" style="margin-left: 1000px;"
+                            class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        ➕
+                    </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel" style="text-align: center">Create
+                                        organization</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-10 mx-auto">
+                                                <form th:action="@{/auth/register}" th:method="post"
+                                                      enctype="multipart/form-data">
+
+
+                                                    <div class="form-group">
+                                                        <label for="username">Username</label>
+                                                        <input type="text" class="form-control" id="username"
+                                                               name="username"/>
+                                                    </div>
+
+
+                                                    <div class="form-group">
+                                                        <label for="email">Email</label>
+                                                        <input type="email" class="form-control" id="email"
+                                                               name="email"/>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="phoneNumber">Phone Number</label>
+                                                        <input type="text" class="form-control" id="phoneNumber"
+                                                               name="phoneNumber"/>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="password">Password</label>
+                                                        <input type="password" class="form-control" name="password"
+                                                               id="password"/>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="ConPassword">Confirm Password</label>
+                                                        <input type="password" class="form-control" name="ConPassword"
+                                                               id="ConPassword"/>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="roleId">Role</label>
+
+                                                        <select  name="roleId" id="roleId">
+                                                            <option value="3">USER</option>
+                                                            <option value="2">ADMIN</option>
+                                                            <br>
+                                                        </select>
+                                                    </div>
+
+
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">Close
+                                                        </button>
+                                                        <button class="btn btn-primary " type="submit"> ➕</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </aside>
+
+
+</header>
+<section th:include="fragment.html :: js"></section>
+</body>
+</html>
